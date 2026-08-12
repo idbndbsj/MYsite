@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Primal Training | Treinos & Alta Performance</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primalBg: '#EEF0FF',
+            primalAccent: '#7C83FF',
+            primalAccentHover: '#686FE6',
+            primalDark: '#121212',
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .page-fade {
+      animation: fadeIn 0.25s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body class="bg-primalBg text-primalDark font-sans antialiased min-h-screen flex flex-col justify-between">
+
+  <!-- NAVBAR -->
+  <header class="bg-primalBg border-b border-primalDark/10 sticky top-0 z-40 backdrop-blur-md bg-opacity-90">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+      <!-- Logo -->
+      <a href="#" onclick="showPage('home')" class="flex items-center gap-3 group">
+        <div class="flex items-center gap-1 transition-transform group-hover:scale-105">
+          <span class="w-3 h-7 bg-primalDark rounded-full inline-block"></span>
+          <span class="w-5 h-5 bg-primalDark rounded-full inline-block"></span>
+        </div>
+        <span class="text-xl font-extrabold tracking-tight">PrimalTraining</span>
+      </a>
+
+      <!-- Links Desktop -->
+      <nav class="hidden md:flex items-center gap-8 font-bold text-sm tracking-wider">
+        <button id="nav-home" onclick="showPage('home')" class="nav-btn transition-colors hover:text-primalAccent uppercase">INÍCIO</button>
+        <button id="nav-workouts" onclick="showPage('workouts')" class="nav-btn transition-colors hover:text-primalAccent uppercase text-primalAccent">EXERCÍCIOS 💪</button>
+        <button id="nav-about" onclick="showPage('about')" class="nav-btn transition-colors hover:text-primalAccent uppercase">SOBRE</button>
+        <button id="nav-plans" onclick="showPage('plans')" class="nav-btn transition-colors hover:text-primalAccent uppercase">PLANOS</button>
+        <button id="nav-contact" onclick="showPage('contact')" class="nav-btn transition-colors hover:text-primalAccent uppercase">CONTATO</button>
+        
+        <button onclick="openAuthModal()" class="text-primalDark border border-primalDark px-4 py-2 rounded-lg font-bold hover:bg-primalDark hover:text-white transition-all uppercase">
+          ENTRAR
+        </button>
+        <button onclick="openBookingModal()" class="bg-primalAccent hover:bg-primalAccentHover text-primalDark px-6 py-3 rounded-lg font-bold transition-all transform hover:-translate-y-0.5 uppercase shadow-sm">
+          RESERVAR SESSÃO
+        </button>
+      </nav>
+
+      <!-- Botão Mobile -->
+      <button onclick="toggleMobileMenu()" class="md:hidden p-2 text-primalDark focus:outline-none" aria-label="Abrir Menu">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Menu Mobile -->
+    <div id="mobile-menu" class="hidden md:hidden bg-primalBg border-b border-primalDark/10 px-6 py-4 space-y-3">
+      <button onclick="showPage('home')" class="block w-full text-left font-bold uppercase py-2">INÍCIO</button>
+      <button onclick="showPage('workouts')" class="block w-full text-left font-bold uppercase py-2 text-primalAccent">EXERCÍCIOS 💪</button>
+      <button onclick="showPage('about')" class="block w-full text-left font-bold uppercase py-2">SOBRE</button>
+      <button onclick="showPage('plans')" class="block w-full text-left font-bold uppercase py-2">PLANOS</button>
+      <button onclick="showPage('contact')" class="block w-full text-left font-bold uppercase py-2">CONTATO</button>
+      <button onclick="openAuthModal()" class="block w-full text-center border border-primalDark py-2 rounded-lg font-bold uppercase mt-2">ENTRAR</button>
+      <button onclick="openBookingModal()" class="block w-full text-center bg-primalAccent text-primalDark px-6 py-3 rounded-lg font-bold uppercase mt-2">
+        RESERVAR SESSÃO
+      </button>
+    </div>
+  </header>
+
+  <!-- CONTEÚDO PRINCIPAL -->
+  <main class="flex-grow">
+
+    <!-- 1. PÁGINA INÍCIO -->
+    <section id="page-home" class="page-content page-fade">
+      <div class="grid grid-cols-1 md:grid-cols-3 border-b border-primalDark">
+        <div class="p-8 md:p-12 border-b md:border-b-0 md:border-r border-primalDark flex flex-col justify-between hover:bg-white/30 transition-colors">
+          <h2 class="text-3xl md:text-4xl font-extrabold uppercase tracking-tight mb-6 leading-tight">
+            GUIADO POR ESPECIALISTAS
+          </h2>
+          <p class="text-primalDark/80 leading-relaxed">
+            Criado por Alberto Dala para oferecer o melhor treinamento funcional e treinos práticos para fazer onde estiver.
+          </p>
+        </div>
+
+        <div class="p-8 md:p-12 border-b md:border-b-0 md:border-r border-primalDark flex flex-col justify-between hover:bg-white/30 transition-colors">
+          <h2 class="text-3xl md:text-4xl font-extrabold uppercase tracking-tight mb-6 leading-tight">
+            TREINE ONDE QUISER
+          </h2>
+          <p class="text-primalDark/80 leading-relaxed">
+            Acesse nosso guia ilustrado de exercícios com fichas completas de execução para treinar em casa ou na academia.
+          </p>
+        </div>
+
+        <div class="relative h-80 md:h-auto overflow-hidden group">
+          <img src="https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&q=80&w=800" alt="Atleta" class="w-full h-full object-cover grayscale contrast-125 transition-transform duration-500 group-hover:scale-105" />
+        </div>
+      </div>
+
+      <div class="bg-white py-12 px-6 border-b border-primalDark text-center">
+        <h1 class="text-4xl md:text-7xl font-black uppercase tracking-tight">
+          JUNTE-SE À <span class="text-primalAccent">COMUNIDADE</span>
+        </h1>
+      </div>
+
+      <div class="bg-primalAccent py-16 px-6 text-center">
+        <p class="text-sm font-bold uppercase tracking-widest mb-3">GUIA DE TREINAMENTO</p>
+        <h2 class="text-3xl md:text-5xl font-black uppercase tracking-tight mb-8">
+          EXPLORE NOSSAS FICHAS DE EXERCÍCIOS
+        </h2>
+        <button onclick="showPage('workouts')" class="bg-white text-primalDark hover:bg-primalDark hover:text-white px-8 py-4 rounded-lg font-bold uppercase transition-all shadow-md transform hover:-translate-y-0.5">
+          VER GUIA DE EXERCÍCIOS 💪
+        </button>
+      </div>
+    </section>
+
+    <!-- 2. PÁGINA GUIA DE EXERCÍCIOS ILUSTRADO -->
+    <section id="page-workouts" class="page-content page-fade hidden">
+      <div class="max-w-7xl mx-auto px-6 py-12">
+        <div class="text-center mb-10">
+          <h1 class="text-4xl md:text-6xl font-black uppercase tracking-tight mb-3">GUIA DE EXERCÍCIOS</h1>
+          <p class="text-primalDark/80 max-w-2xl mx-auto font-medium">
+            Aprenda a forma correta de executar cada movimento com orientações detalhadas e séries sugeridas.
+          </p>
+        </div>
+
+        <!-- Filtros de Exercícios -->
+        <div class="flex flex-wrap justify-center gap-3 mb-10">
+          <button onclick="filterWorkouts('all')" class="filter-btn bg-primalDark text-white px-5 py-2 rounded-full text-xs font-bold uppercase">TODOS</button>
+          <button onclick="filterWorkouts('pernas')" class="filter-btn bg-white border border-primalDark px-5 py-2 rounded-full text-xs font-bold uppercase hover:bg-primalAccent">PERNAS & GLÚTEOS</button>
+          <button onclick="filterWorkouts('braços')" class="filter-btn bg-white border border-primalDark px-5 py-2 rounded-full text-xs font-bold uppercase hover:bg-primalAccent">MEMBROS SUPERIORES</button>
+          <button onclick="filterWorkouts('core')" class="filter-btn bg-white border border-primalDark px-5 py-2 rounded-full text-xs font-bold uppercase hover:bg-primalAccent">CORE & ABDÔMEN</button>
+          <button onclick="filterWorkouts('cardio')" class="filter-btn bg-white border border-primalDark px-5 py-2 rounded-full text-xs font-bold uppercase hover:bg-primalAccent">CARDIO & EMAGRECIMENTO</button>
+        </div>
+
+        <!-- Grid de Cards de Exercícios com Imagens -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          
+          <!-- Card 1: Agachamento -->
+          <div class="workout-card bg-white border-2 border-primalDark rounded-2xl overflow-hidden shadow-md flex flex-col justify-between" data-category="pernas">
+            <div>
+              <div class="relative h-52 bg-slate-100 overflow-hidden border-b-2 border-primalDark">
+                <img src="https://images.unsplash.com/photo-1574680096145-d05b474e2155?auto=format&fit=crop&q=80&w=800" alt="Agachamento" class="w-full h-full object-cover" />
+                <span class="absolute top-3 left-3 bg-primalDark text-white text-[10px] font-black uppercase px-3 py-1 rounded-full">Sem Equipamento</span>
+              </div>
+              <div class="p-6">
+                <div class="flex justify-between items-center mb-2">
+                  <span class="text-[10px] font-black uppercase bg-primalAccent px-2 py-1 rounded">Iniciante / Intermediário</span>
+                  <span class="text-xs font-bold text-primalDark/60">3 x 12 Reps</span>
+                </div>
+                <h3 class="text-xl font-black uppercase mb-3">AGACHAMENTO LIVRE</h3>
+                <ul class="text-xs text-primalDark/80 space-y-1.5 list-disc list-inside">
+                  <li>Pés alinhados na largura dos ombros.</li>
+                  <li>Mantenha a coluna ereta durante a descida.</li>
+                  <li>Empurre o chão com os calcanhares na subida.</li>
+                </ul>
+              </div>
+            </div>
+            <div class="p-6 pt-0">
+              <span class="block w-full text-center bg-primalBg text-primalDark text-xs font-bold py-2 rounded border border-primalDark/20">Foco: Quadríceps & Glúteos</span>
+            </div>
+          </div>
+
+          <!-- Card 2: Flexões de Braço -->
+          <div class="workout-card bg-white border-2 border-primalDark rounded-2xl overflow-hidden shadow-md flex flex-col justify-between" data-category="braços">
+            <div>
+              <div class="relative h-52 bg-slate-100 overflow-hidden border-b-2 border-primalDark">
+                <img src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?auto=format&fit=crop&q=80&w=800" alt="Flexão" class="w-full h-full object-cover" />
+                <span class="absolute top-3 left-3 bg-primalDark text-white text-[10px] font-black uppercase px-3 py-1 rounded-full">Sem Equipamento</span>
+              </div>
+              <div class="p-6">
+                <div class="flex justify-between items-center mb-2">
+                  <span class="text-[10px] font-black uppercase bg-primalAccent px-2 py-1 rounded">Membros Superiores</span>
+                  <span class="text-xs font-bold text-primalDark/60">4 x 10 Reps</span>
+                </div>
+                <h3 class="text-xl font-black uppercase mb-3">FLEXÃO DE BRAÇOS</h3>
+                <ul class="text-xs text-primalDark/80 space-y-1.5 list-disc list-inside">
+                  <li>Mãos posicionadas um pouco além dos ombros.</li>
+                  <li>Corpo em linha reta dos ombros aos pés.</li>
+                  <li>Desça o peito próximo ao chão com controle.</li>
+                </ul>
+              </div>
+            </div>
+            <div class="p-6 pt-0">
+              <span class="block w-full text-center bg-primalBg text-primalDark text-xs font-bold py-2 rounded border border-primalDark/20">Foco: Peitoral & Tríceps</span>
+            </div>
+          </div>
+
+          <!-- Card 3: Prancha Ventral -->
+          <div class="workout-card bg-white border-2 border-primalDark rounded-2xl overflow-hidden shadow-md flex flex-col justify-between" data-category="core">
+            <div>
+              <div class="relative h-52 bg-slate-100 overflow-hidden border-b-2 border-primalDark">
+                <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&q=80&w=800" alt="Prancha" class="w-full h-full object-cover" />
+                <span class="absolute top-3 left-3 bg-primalDark text-white text-[10px] font-black uppercase px-3 py-1 rounded-full">Estabilização</span>
+              </div>
+              <div class="p-6">
+                <div class="flex justify-between items-center mb-2">
+                  <span class="text-[10px] font-black uppercase bg-primalAccent px-2 py-1 rounded">Core</span>
+                  <span class="text-xs font-bold text-primalDark/60">3 x 45 seg</span>
+                </div>
+                <h3 class="text-xl font-black uppercase mb-3">PRANCHA VENTRAL</h3>
+                <ul class="text-xs text-primalDark/80 space-y-1.5 list-disc list-inside">
+                  <li>Apoie antebraços e ponta dos pés no chão.</li>
+                  <li>Contraia o abdômen e os glúteos firmemente.</li>
+                  <li>Evite deixar o quadril cair ou subir demais.</li>
+                </ul>
+              </div>
+            </div>
+            <div class="p-6 pt-0">
+              <span class="block w-full text-center bg-primalBg text-primalDark text-xs font-bold py-2 rounded border border-primalDark/20">Foco: Abdômen & Lombar</span>
+            </div>
+          </div>
+
+          <!-- Card 4: Burpees -->
+          <div class="workout-card bg-white border-2 border-primalDark rounded-2xl overflow-hidden shadow-md flex flex-col justify-between" data-category="cardio">
+            <div>
+              <div class="relative h-52 bg-slate-100 overflow-hidden border-b-2 border-primalDark">
+                <img src="https://images.unsplash.com/photo-1601422407692-ec4eeec1d9b3?auto=format&fit=crop&q=80&w=800" alt="Burpee" class="w-full h-full object-cover" />
+                <span class="absolute top-3 left-3 bg-primalDark text-white text-[10px] font-black uppercase px-3 py-1 rounded-full">Alta Intensidade</span>
+              </div>
+              <div class="p-6">
+                <div class="flex justify-between items-center mb-2">
+                  <span class="text-[10px] font-black uppercase bg-primalDark text-white px-2 py-1 rounded">Avançado</span>
+                  <span class="text-xs font-bold text-primalDark/60">4 x 12 Reps</span>
+                </div>
+                <h3 class="text-xl font-black uppercase mb-3">BURPEES PRIMAL</h3>
+                <ul class="text-xs text-primalDark/80 space-y-1.5 list-disc list-inside">
+                  <li>Agache e apoie as mãos no chão.</li>
+                  <li>Jogue os pés para trás formando uma prancha.</li>
+                  <li>Retorne rapidamente e salte estendendo os braços.</li>
+                </ul>
+              </div>
+            </div>
+            <div class="p-6 pt-0">
+              <span class="block w-full text-center bg-primalBg text-primalDark text-xs font-bold py-2 rounded border border-primalDark/20">Foco: Condicionamento Total</span>
+            </div>
+          </div>
+
+          <!-- Card 5: Afundo -->
+          <div class="workout-card bg-white border-2 border-primalDark rounded-2xl overflow-hidden shadow-md flex flex-col justify-between" data-category="pernas">
+            <div>
+              <div class="relative h-52 bg-slate-100 overflow-hidden border-b-2 border-primalDark">
+                <img src="https://images.unsplash.com/photo-1434682881908-b43d0467b798?auto=format&fit=crop&q=80&w=800" alt="Afundo" class="w-full h-full object-cover" />
+                <span class="absolute top-3 left-3 bg-primalDark text-white text-[10px] font-black uppercase px-3 py-1 rounded-full">Equilíbrio</span>
+              </div>
+              <div class="p-6">
+                <div class="flex justify-between items-center mb-2">
+                  <span class="text-[10px] font-black uppercase bg-primalAccent px-2 py-1 rounded">Unilateral</span>
+                  <span class="text-xs font-bold text-primalDark/60">3 x 12 cada perna</span>
+                </div>
+                <h3 class="text-xl font-black uppercase mb-3">AFUNDO / PASSADA</h3>
+                <ul class="text-xs text-primalDark/80 space-y-1.5 list-disc list-inside">
+                  <li>Dê um passo à frente e flexione ambos os joelhos.</li>
+                  <li>O joelho de trás deve quase tocar o solo.</li>
+                  <li>Mantenha o tronco ereto durante todo o movimento.</li>
+                </ul>
+              </div>
+            </div>
+            <div class="p-6 pt-0">
+              <span class="block w-full text-center bg-primalBg text-primalDark text-xs font-bold py-2 rounded border border-primalDark/20">Foco: Coxas & Glúteos</span>
+            </div>
+          </div>
+
+          <!-- Card 6: Polichinelos -->
+          <div class="workout-card bg-white border-2 border-primalDark rounded-2xl overflow-hidden shadow-md flex flex-col justify-between" data-category="cardio">
+            <div>
+              <div class="relative h-52 bg-slate-100 overflow-hidden border-b-2 border-primalDark">
+                <img src="https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&q=80&w=800" alt="Polichinelo" class="w-full h-full object-cover" />
+                <span class="absolute top-3 left-3 bg-primalDark text-white text-[10px] font-black uppercase px-3 py-1 rounded-full">Aquecimento</span>
+              </div>
+              <div class="p-6">
+                <div class="flex justify-between items-center mb-2">
+                  <span class="text-[10px] font-black uppercase bg-primalAccent px-2 py-1 rounded">Iniciante</span>
+                  <span class="text-xs font-bold text-primalDark/60">3 x 1 min</span>
+                </div>
+                <h3 class="text-xl font-black uppercase mb-3">POLICHINELOS</h3>
+                <ul class="text-xs text-primalDark/80 space-y-1.5 list-disc list-inside">
+                  <li>Inicie com braços e pernas fechados.</li>
+                  <li>Salte abrindo pernas e elevando os braços.</li>
+                  <li>Mantenha um ritmo constante para elevar a frequência.</li>
+                </ul>
+              </div>
+            </div>
+            <div class="p-6 pt-0">
+              <span class="block w-full text-center bg-primalBg text-primalDark text-xs font-bold py-2 rounded border border-primalDark/20">Foco: Queima Calórica</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. PÁGINA SOBRE -->
+    <section id="page-about" class="page-content page-fade hidden">
+      <div class="grid grid-cols-1 md:grid-cols-2 border-b border-primalDark min-h-[500px]">
+        <div class="relative h-80 md:h-auto border-b md:border-b-0 md:border-r border-primalDark overflow-hidden group">
+          <img src="https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?auto=format&fit=crop&q=80&w=1000" alt="Levantamento terra" class="w-full h-full object-cover grayscale contrast-125 transition-transform duration-500 group-hover:scale-105" />
+        </div>
+        <div class="p-8 md:p-16 flex flex-col justify-center bg-primalBg">
+          <h1 class="text-3xl md:text-5xl font-black uppercase tracking-tight mb-6 leading-tight">
+            PROPRIETÁRIO & VISÃO
+          </h1>
+          <p class="text-lg text-primalDark/80 leading-relaxed mb-4">
+            Fundado por <strong>Alberto Dala</strong>, o projecto <strong>PrimalTraining</strong> nasceu para transformar o acesso ao fitness de alta performance, unindo acompanhamento presencial e rotinas de treino para casa.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. PÁGINA PLANOS -->
+    <section id="page-plans" class="page-content page-fade hidden">
+      <div class="py-16 px-6 max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+          <h1 class="text-4xl md:text-6xl font-black uppercase tracking-tight mb-4">PLANOS DE ADESÃO</h1>
+          <p class="text-lg text-primalDark/70 max-w-2xl mx-auto">Escolha o formato ideal para a sua rotina de treinos.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="bg-white border-2 border-primalDark p-8 rounded-xl flex flex-col justify-between">
+            <div>
+              <span class="text-xs font-black uppercase bg-primalBg px-3 py-1 rounded-full">DIÁRIA</span>
+              <h3 class="text-3xl font-black uppercase mt-4 mb-2">DAY PASS</h3>
+              <p class="text-3xl font-black mb-6">3.500 Kz <span class="text-sm font-normal text-primalDark/70">/ treino</span></p>
+            </div>
+            <button onclick="openBookingModal('Day Pass')" class="w-full bg-primalDark text-white py-3 rounded-lg font-bold uppercase">COMPRAR PASSE</button>
+          </div>
+
+          <div class="bg-primalAccent border-2 border-primalDark p-8 rounded-xl flex flex-col justify-between shadow-md relative">
+            <div>
+              <span class="text-xs font-black uppercase bg-white/40 px-3 py-1 rounded-full">MENSAL</span>
+              <h3 class="text-3xl font-black uppercase mt-4 mb-2">TRIBO MENSAL</h3>
+              <p class="text-3xl font-black mb-6">28.000 Kz <span class="text-sm font-normal text-primalDark/70">/ mês</span></p>
+            </div>
+            <button onclick="openBookingModal('Plano Mensal')" class="w-full bg-primalDark text-white py-3 rounded-lg font-bold uppercase">ASSINAR AGORA</button>
+          </div>
+
+          <div class="bg-white border-2 border-primalDark p-8 rounded-xl flex flex-col justify-between">
+            <div>
+              <span class="text-xs font-black uppercase bg-primalBg px-3 py-1 rounded-full">PERSONAL</span>
+              <h3 class="text-3xl font-black uppercase mt-4 mb-2">PRIMAL VIP</h3>
+              <p class="text-3xl font-black mb-6">55.000 Kz <span class="text-sm font-normal text-primalDark/70">/ mês</span></p>
+            </div>
+            <button onclick="openBookingModal('Plano VIP')" class="w-full bg-primalDark text-white py-3 rounded-lg font-bold uppercase">QUERO SER VIP</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. PÁGINA CONTATO -->
+    <section id="page-contact" class="page-content page-fade hidden">
+      <div class="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-2 gap-12">
+        <div>
+          <h1 class="text-4xl md:text-5xl font-black uppercase tracking-tight mb-6">FALE DIRETO COM O DONO</h1>
+          <p class="text-primalDark/80 mb-8 leading-relaxed">
+            Dúvidas ou agendamentos diretos? Envie uma mensagem no WhatsApp ou no e-mail oficial do proprietário.
+          </p>
+          
+          <form onsubmit="handleContactSubmit(event)" class="space-y-4">
+            <div>
+              <label class="block text-xs font-black uppercase mb-1">Nome Completo</label>
+              <input type="text" required class="w-full p-3 rounded-lg border border-primalDark/30 bg-white" />
+            </div>
+            <div>
+              <label class="block text-xs font-black uppercase mb-1">E-mail</label>
+              <input type="email" required class="w-full p-3 rounded-lg border border-primalDark/30 bg-white" />
+            </div>
+            <div>
+              <label class="block text-xs font-black uppercase mb-1">Mensagem</label>
+              <textarea rows="4" required class="w-full p-3 rounded-lg border border-primalDark/30 bg-white"></textarea>
+            </div>
+            <button type="submit" class="w-full bg-primalAccent hover:bg-primalAccentHover text-primalDark py-3 rounded-lg font-bold uppercase transition-all">
+              ENVIAR MENSAGEM
+            </button>
+          </form>
+        </div>
+
+        <div class="flex flex-col justify-between bg-white p-8 border-2 border-primalDark rounded-xl">
+          <div>
+            <h3 class="text-2xl font-black uppercase mb-4">CONTATO OFICIAL</h3>
+            <div class="space-y-4 text-sm font-semibold text-primalDark/80">
+              <p>👤 <strong>Proprietário:</strong> Alberto Dala</p>
+              <p>📱 <strong>WhatsApp / Tel:</strong> <a href="https://wa.me/244931634575" target="_blank" class="text-primalAccent font-black underline">931 634 575</a></p>
+              <p>✉️ <strong>E-mail:</strong> <a href="mailto:albertodala555@gmail.com" class="text-primalAccent font-black underline">albertodala555@gmail.com</a></p>
+              <p>📍 Luanda, Angola</p>
+            </div>
+            <hr class="my-6 border-primalDark/20" />
+            <a href="https://wa.me/244931634575" target="_blank" class="block w-full text-center bg-green-500 hover:bg-green-600 text-white font-black py-3 rounded-lg uppercase transition-colors">
+              💬 MENSAGEM DIRETA NO WHATSAPP
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- MODAL DE RESERVA -->
+  <div id="booking-modal" class="fixed inset-0 bg-primalDark/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-primalBg border-2 border-primalDark max-w-lg w-full rounded-2xl p-6 md:p-8 relative shadow-2xl">
+      <button onclick="closeBookingModal()" class="absolute top-4 right-4 text-2xl font-black">✕</button>
+      <h2 class="text-2xl font-black uppercase mb-2">RESERVAR SESSÃO</h2>
+      <form onsubmit="handleBookingSubmit(event)" class="space-y-4 mt-4">
+        <div>
+          <label class="block text-xs font-black uppercase mb-1">Seu Nome</label>
+          <input type="text" required class="w-full p-3 rounded-lg border border-primalDark/30 bg-white" />
+        </div>
+        <div>
+          <label class="block text-xs font-black uppercase mb-1">Seu Telefone</label>
+          <input type="tel" required class="w-full p-3 rounded-lg border border-primalDark/30 bg-white" />
+        </div>
+        <button type="submit" class="w-full bg-primalAccent text-primalDark py-3 rounded-lg font-black uppercase">CONFIRMAR</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL DE AUTENTICAÇÃO -->
+  <div id="auth-modal" class="fixed inset-0 bg-primalDark/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white border-2 border-primalDark max-w-md w-full rounded-2xl p-6 md:p-8 relative shadow-2xl">
+      <button onclick="closeAuthModal()" class="absolute top-4 right-4 text-2xl font-black">✕</button>
+      <h2 class="text-2xl font-black uppercase mb-4">ENTRAR NA ÁREA DE MEMBROS</h2>
+      <form onsubmit="handleAuthSubmit(event)" class="space-y-4">
+        <input type="email" placeholder="E-mail" required class="w-full p-3 rounded-lg border border-primalDark/30 bg-primalBg" />
+        <input type="password" placeholder="Senha" required class="w-full p-3 rounded-lg border border-primalDark/30 bg-primalBg" />
+        <button type="submit" class="w-full bg-primalDark text-white py-3 rounded-lg font-bold uppercase">ENTRAR</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="bg-primalDark text-white py-8 border-t border-primalDark mt-12">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
+      <span class="font-extrabold uppercase tracking-wider text-sm">PrimalTraining © 2026</span>
+      <p class="text-xs text-neutral-400">
+        Fundador & Proprietário: <strong>Alberto Dala</strong> | WhatsApp: <strong>931634575</strong> | E-mail: <strong>albertodala555@gmail.com</strong>
+      </p>
+    </div>
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script>
+    function showPage(pageId) {
+      document.querySelectorAll('.page-content').forEach(p => p.classList.add('hidden'));
+      const target = document.getElementById(`page-${pageId}`);
+      if (target) target.classList.remove('hidden');
+
+      document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('text-primalAccent', 'underline', 'underline-offset-8'));
+      const activeNav = document.getElementById(`nav-${pageId}`);
+      if (activeNav) activeNav.classList.add('text-primalAccent', 'underline', 'underline-offset-8');
+
+      document.getElementById('mobile-menu').classList.add('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function toggleMobileMenu() {
+      document.getElementById('mobile-menu').classList.toggle('hidden');
+    }
+
+    // Filtro dos Exercícios
+    function filterWorkouts(category) {
+      const cards = document.querySelectorAll('.workout-card');
+      cards.forEach(card => {
+        if (category === 'all' || card.getAttribute('data-category') === category) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    }
+
+    // Modais
+    function openBookingModal() { document.getElementById('booking-modal').classList.remove('hidden'); }
+    function closeBookingModal() { document.getElementById('booking-modal').classList.add('hidden'); }
+    function openAuthModal() { document.getElementById('auth-modal').classList.remove('hidden'); }
+    function closeAuthModal() { document.getElementById('auth-modal').classList.add('hidden'); }
+
+    function handleBookingSubmit(e) { e.preventDefault(); alert('Reserva enviada!'); closeBookingModal(); }
+    function handleAuthSubmit(e) { e.preventDefault(); alert('Login efetuado!'); closeAuthModal(); }
+    function handleContactSubmit(e) { e.preventDefault(); alert('Mensagem enviada com sucesso!'); e.target.reset(); }
+
+    document.addEventListener('DOMContentLoaded', () => showPage('home'));
+  </script>
+</body>
+</html>
